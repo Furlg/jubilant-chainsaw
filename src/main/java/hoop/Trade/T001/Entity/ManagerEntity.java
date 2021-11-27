@@ -30,7 +30,7 @@ public class ManagerEntity implements Serializable {
     private String email;
 
     /**
-     * 管理员角色 0-超级管理员,1-区域管理员,3-普通管理员
+     * 管理员角色 0-超级管理员,1-区域管理员,2-普通管理员
      */
     private Object managerRole;
 

@@ -11,7 +11,7 @@
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Base_Column_List">
-    MANAGER_ID, MANAGER_NAME, PHONE_NUMBER, EMAIL, MANAGER_ROLE, ACTIVE, `PASSWORD`
+     MANAGER_ID, MANAGER_NAME, PHONE_NUMBER, EMAIL, MANAGER_ROLE, ACTIVE, `PASSWORD`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -23,11 +23,11 @@
     delete from te_om_manager
     where MANAGER_ID = #{managerId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" keyColumn="MANAGER_ID" keyProperty="managerId" parameterType="hoop.Trade.T001.Entity.ManagerEntity" useGeneratedKeys="true">
-    insert into te_om_manager (MANAGER_NAME, PHONE_NUMBER, EMAIL, 
+  <insert id="insert" keyColumn="MANAGER_ID" keyProperty="managerId" parameterType="hoop.Trade.T001.Entity.ManagerEntity" useGeneratedKeys="false">
+    insert into te_om_manager (MANAGER_ID,MANAGER_NAME, PHONE_NUMBER, EMAIL,
       MANAGER_ROLE, ACTIVE, `PASSWORD`
       )
-    values (#{managerName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+    values (#{managerId,jdbcType=VARCHAR},#{managerName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{managerRole,jdbcType=OTHER}, #{active,jdbcType=OTHER}, #{password,jdbcType=VARCHAR}
       )
   </insert>

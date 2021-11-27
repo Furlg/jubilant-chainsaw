@@ -9,6 +9,7 @@ public enum ErrorCodeAndMessage {
     NETWORK_ERROR("9999", "网络连接异常"),
     MANAGER_UNKNOWN("N001","用户不存在"),
     MANAGER_ERROR("E001","用户名或密码错误"),
+    INSERT_ERROR("I001","记录增加失败"),
 
     QUERY_NULL("Q001", "查询无记录");
     /**
