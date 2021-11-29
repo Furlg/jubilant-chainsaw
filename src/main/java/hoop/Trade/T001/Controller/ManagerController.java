@@ -46,4 +46,21 @@ public class ManagerController {
         response = new Response(managerServiceImp.insert(requestMap));
         return response;
     }
+
+    /**根据用户姓名|手机号|邮箱查询管理员信息**/
+    @RequestMapping(value = "Q03" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Response selectByNamePhoneEmai(@RequestBody Map<String,Object> map){
+        log.error(String.valueOf(map));
+        response = new Response(managerServiceImp.selectByNamePhoneEmail(map));
+        return response;
+    }
+
+    /**根据管理员名称|手机号|邮箱|是否有效标志查询管理员信息**/
+    @RequestMapping(value = "Q04",method = RequestMethod.POST)
+    @ResponseBody
+    public Response selectByNamePhoneEmailActive(@RequestBody Map<String,Object> reqMap){
+        response = new Response(managerServiceImp.selectByNamePhoneEmailActive(reqMap));
+        return response;
+    }
 }

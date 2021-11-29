@@ -44,5 +44,15 @@ public class ManagerEntity implements Serializable {
      */
     private String password;
 
+    /**
+     * 翻页起始行数
+     */
+    private int pageCount;
+
+    /**
+     * 翻页大小  --理解为每页展示的条数
+     */
+    private int pageSize;
+
     private static final long serialVersionUID = 1L;
 }

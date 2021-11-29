@@ -14,11 +14,36 @@
      MANAGER_ID, MANAGER_NAME, PHONE_NUMBER, EMAIL, MANAGER_ROLE, ACTIVE, `PASSWORD`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from te_om_manager
     where MANAGER_ID = #{managerId,jdbcType=VARCHAR}
   </select>
+
+  <!--根据管理员名称|手机号|邮箱|是否有效|查询管理员信息-->
+  <select id="selectByNamePhoneEmail" parameterType="hoop.Trade.T001.Entity.ManagerEntity" resultType="hoop.Trade.T001.Entity.ManagerEntity">
+    select
+    MANAGER_ID AS managerId,  MANAGER_NAME AS managerName,  PHONE_NUMBER AS phoneNumber,  EMAIL AS email, MANAGER_ROLE AS managerRole, ACTIVE AS active
+        from te_om_manager
+            where
+                  MANAGER_NAME = ${managerName}
+                and PHONE_NUMBER = ${phoneNumber}
+                and EMAIL        = ${email}
+  </select>
+
+
+  <!--根据管理员姓名|手机号|邮箱|是否活动|等查询管理员信息  【此时返回的是个Hashtable集合不再关联实体类解决了使用使用实体类不想返回的字段实体类会返回NULL的问题】-->
+  <select id="selectByNamePhoneEmailActive" parameterType="hoop.Trade.T001.Entity.ManagerEntity" resultType="java.util.TreeMap">
+    select
+      MANAGER_ID AS managerId,  MANAGER_NAME AS managerName,  PHONE_NUMBER AS phoneNumber,  EMAIL AS email, MANAGER_ROLE AS managerRole, ACTIVE AS active
+    from te_om_manager
+    where
+      MANAGER_NAME = ${managerName}
+      and PHONE_NUMBER = ${phoneNumber}
+      and EMAIL        = ${email}
+        limit ${pageCount},${pageSize}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from te_om_manager
     where MANAGER_ID = #{managerId,jdbcType=VARCHAR}

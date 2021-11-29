@@ -18,9 +18,11 @@ server:
 #打印sql
 logging:
   level:
-    com.trade: debug
+    hoop.Trade: debug
 
 #mybatis配置
 
 mybatis:
   mapper-locations: classpath:/generator/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

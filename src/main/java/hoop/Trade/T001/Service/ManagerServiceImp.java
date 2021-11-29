@@ -8,8 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -75,5 +74,47 @@ public class ManagerServiceImp implements ManagerService {
             throw  new GlobalException(ErrorCodeAndMessage.INSERT_ERROR);
         }
         return i;
+    }
+
+    /**
+     * 根据用户名|手机号|邮箱进行查询返回多条数据,且按照用户编号排序.支持分页
+     *
+     * @param map 前端post请求数据map集合
+     * @ArrayList<ManagerEntity></>
+     **/
+    @Override
+    public ArrayList<ManagerEntity> selectByNamePhoneEmail(Map<String,Object> map) {
+        ManagerEntity managerEntity = new ManagerEntity();
+
+        managerEntity.setManagerName(map.get("managerName").toString().isEmpty()?"MANAGER_NAME":"\""+map.get("managerName").toString()+"\"");
+        managerEntity.setPhoneNumber(map.get("phoneNumber").toString().isEmpty()?"PHONE_NUMBER":"\""+map.get("phoneNumber").toString()+"\"");
+        managerEntity.setEmail(map.get("email").toString().isEmpty()?"EMAIL":"\""+map.get("email").toString()+"\"");
+
+
+        return managerMapper.selectByNamePhoneEmail(managerEntity);
+    }
+
+    /**
+     * 自定义返回结果集,即再次封装mybatis返回的结果集,支持翻页操作
+     *
+     * @param reqMap
+     * @Map<String,Object>
+     * @return
+     */
+    @Override
+    public Hashtable<String,ArrayList<TreeMap<String,Object>>>  selectByNamePhoneEmailActive(Map<String, Object> reqMap) {
+        ManagerEntity managerEntity = new ManagerEntity();
+        managerEntity.setManagerName(reqMap.get("managerName").toString().isEmpty()?"MANAGER_NAME":"\""+reqMap.get("managerName").toString()+"\"");
+        managerEntity.setPhoneNumber(reqMap.get("phoneNumber").toString().isEmpty()?"PHONE_NUMBER":"\""+reqMap.get("phoneNumber").toString()+"\"");
+        managerEntity.setEmail(reqMap.get("email").toString().isEmpty()?"EMAIL":"\""+reqMap.get("email").toString()+"\"");
+        managerEntity.setPageCount(reqMap.get("pageCount").toString().isEmpty()?0:Integer.parseInt(reqMap.get("pageCount").toString()));
+
+        //每页翻页的条数默认为10条
+        managerEntity.setPageSize(2);
+     ArrayList<TreeMap<String,Object>>  arrayList = managerMapper.selectByNamePhoneEmailActive(managerEntity);
+
+        Hashtable<String, ArrayList<TreeMap<String, Object>>> hashtable = new Hashtable<>();
+            hashtable.put("ManagerInfoList",arrayList);
+            return hashtable;
     }
 }
