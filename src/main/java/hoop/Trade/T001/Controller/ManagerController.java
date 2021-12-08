@@ -56,7 +56,10 @@ public class ManagerController {
         return response;
     }
 
-    /**根据管理员名称|手机号|邮箱|是否有效标志查询管理员信息**/
+    /**根据管理员名称|手机号|邮箱|是否有效标志查询管理员信
+     * @param reqMap
+     * @param reqMap息*
+     * @return */
     @RequestMapping(value = "Q04",method = RequestMethod.POST)
     @ResponseBody
     public Response selectByNamePhoneEmailActive(@RequestBody Map<String,Object> reqMap){

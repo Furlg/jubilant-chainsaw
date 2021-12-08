@@ -39,6 +39,13 @@ public interface ManagerService {
      * @param reqMap
      * @Map<String,Object>
      */
-    Hashtable<String,ArrayList<TreeMap<String,Object>>> selectByNamePhoneEmailActive(Map<String,Object> reqMap);
+    Hashtable<String,Object> selectByNamePhoneEmailActive(Map<String,Object> reqMap);
+    
+    /**
+     * 增加管理员
+     * @param record
+     * @return int 增加成功后返回受影响的条数
+     */
+    int insertSelective(ManagerEntity record);
 
 }

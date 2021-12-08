@@ -102,7 +102,7 @@ public class ManagerServiceImp implements ManagerService {
      * @return
      */
     @Override
-    public Hashtable<String,ArrayList<TreeMap<String,Object>>>  selectByNamePhoneEmailActive(Map<String, Object> reqMap) {
+    public Hashtable<String,Object>  selectByNamePhoneEmailActive(Map<String, Object> reqMap) {
         ManagerEntity managerEntity = new ManagerEntity();
         managerEntity.setManagerName(reqMap.get("managerName").toString().isEmpty()?"MANAGER_NAME":"\""+reqMap.get("managerName").toString()+"\"");
         managerEntity.setPhoneNumber(reqMap.get("phoneNumber").toString().isEmpty()?"PHONE_NUMBER":"\""+reqMap.get("phoneNumber").toString()+"\"");
@@ -110,11 +110,25 @@ public class ManagerServiceImp implements ManagerService {
         managerEntity.setPageCount(reqMap.get("pageCount").toString().isEmpty()?0:Integer.parseInt(reqMap.get("pageCount").toString()));
 
         //每页翻页的条数默认为10条
-        managerEntity.setPageSize(2);
+        managerEntity.setPageSize(10);
      ArrayList<TreeMap<String,Object>>  arrayList = managerMapper.selectByNamePhoneEmailActive(managerEntity);
 
-        Hashtable<String, ArrayList<TreeMap<String, Object>>> hashtable = new Hashtable<>();
+        Hashtable<String, Object> hashtable = new Hashtable<>();
+        hashtable.put("PageTotal",arrayList.size());
             hashtable.put("ManagerInfoList",arrayList);
             return hashtable;
+    }
+    /**
+     * 增加管理员
+     * @param record
+     * @return int 增加成功后返回受影响的条数
+     */
+    @Override
+    public int insertSelective(ManagerEntity record) {
+       int i = managerMapper.insertSelective(record);
+       if(i !=1){
+           throw new GlobalException(ErrorCodeAndMessage.INSERT_ERROR);
+       }
+       return i;
     }
 }
