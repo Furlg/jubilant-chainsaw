@@ -66,4 +66,15 @@ public class ManagerController {
         response = new Response(managerServiceImp.selectByNamePhoneEmailActive(reqMap));
         return response;
     }
+    /**
+     * 根据管理员id更新管理员信息
+     * @param record
+     * @return 
+     */
+    @RequestMapping(value = "U01",method = RequestMethod.POST)
+    @ResponseBody
+    public Response updateByPrimaryKey(@RequestBody Map<String,Object> reqMap){
+        response = new Response(managerServiceImp.updateByPrimaryKey(reqMap));
+        return response;
+    }
 }

@@ -10,6 +10,8 @@ public enum ErrorCodeAndMessage {
     MANAGER_UNKNOWN("N001","用户不存在"),
     MANAGER_ERROR("E001","用户名或密码错误"),
     INSERT_ERROR("I001","记录增加失败"),
+    UPDATE_ERROR("U001","更新记录失败"),
+    UPDATE_MANAGER_ID_NOT_NULL("U002","管理员编号不能为空"),
 
     QUERY_NULL("Q001", "查询无记录");
     /**

@@ -47,5 +47,11 @@ public interface ManagerService {
      * @return int 增加成功后返回受影响的条数
      */
     int insertSelective(ManagerEntity record);
-
+    
+    /**
+     * 根据管理员id进行更新管理员信息,使用的方式为MySQL的procedure存储程序
+     * @param record
+     * @return 
+     */
+    int updateByPrimaryKey(Map<String,Object> reqMap);
 }

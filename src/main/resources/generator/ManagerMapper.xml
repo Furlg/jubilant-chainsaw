@@ -123,14 +123,17 @@
     </set>
     where MANAGER_ID = #{managerId,jdbcType=VARCHAR}
   </update>
+  
+  <!--根据名称和手机号更改管理员信息,使用的方式为procedure-->
   <update id="updateByPrimaryKey" parameterType="hoop.Trade.T001.Entity.ManagerEntity">
-    update te_om_manager
-    set MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
-      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      MANAGER_ROLE = #{managerRole,jdbcType=OTHER},
-      ACTIVE = #{active,jdbcType=OTHER},
-      `PASSWORD` = #{password,jdbcType=VARCHAR}
-    where MANAGER_ID = #{managerId,jdbcType=VARCHAR}
+      call UPDATE_IB_OM_MANAGER_BY_NAME_PHONE(
+            #{managerId,jdbcType=VARCHAR},
+            #{managerName,jdbcType=VARCHAR},
+            #{phoneNumber,jdbcType=VARCHAR},
+            #{email,jdbcType=VARCHAR},
+            #{managerRole,jdbcType=OTHER},
+            #{active,jdbcType=OTHER},
+            #{password,jdbcType=VARCHAR}
+      )
   </update>
 </mapper>

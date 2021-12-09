@@ -20,7 +20,12 @@ public interface ManagerMapper {
     ManagerEntity selectByPrimaryKey(String managerId);
 
     int updateByPrimaryKeySelective(ManagerEntity record);
-
+    
+    /**
+     * 根据管理员id进行更新管理员信息,使用的方式为MySQL的procedure存储程序
+     * @param record
+     * @return 
+     */
     int updateByPrimaryKey(ManagerEntity record);
 
     /**

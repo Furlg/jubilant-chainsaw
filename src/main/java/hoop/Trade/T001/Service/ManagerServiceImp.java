@@ -131,4 +131,28 @@ public class ManagerServiceImp implements ManagerService {
        }
        return i;
     }
+    
+    /**
+     * 根据管理员id进行更新管理员信息,使用的方式为MySQL的procedure存储程序
+     * @param record
+     * @return 
+     */
+    public int updateByPrimaryKey(Map<String,Object> reqMap){
+            ManagerEntity managerEntity = new ManagerEntity();
+                if(reqMap.get("manager_id").toString().isEmpty()){
+                    throw new GlobalException(ErrorCodeAndMessage.UPDATE_MANAGER_ID_NOT_NULL);
+                }
+                managerEntity.setManagerId(reqMap.get("manager_id").toString());
+                managerEntity.setManagerName(reqMap.get("managerName").toString());
+                managerEntity.setPhoneNumber(reqMap.get("phoneNumber").toString());
+                managerEntity.setEmail(reqMap.get("email").toString());
+                managerEntity.setManagerRole(reqMap.get("managerRole").toString());
+                managerEntity.setActive(reqMap.get("active").toString());
+                managerEntity.setPassword(reqMap.get("password").toString());       
+        int i = managerMapper.updateByPrimaryKey(managerEntity);
+        if(i !=1){
+            throw  new GlobalException(ErrorCodeAndMessage.UPDATE_ERROR);
+        }
+        return  i;
+    }
 }
