@@ -14,7 +14,9 @@ public interface ManagerMapper {
 
     int insert(ManagerEntity record);
 
-    /**增加管理员**/
+    /**增加管理
+     * @param record
+     * @return */
     int insertSelective(ManagerEntity record);
 
     ManagerEntity selectByPrimaryKey(String managerId);

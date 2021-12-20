@@ -9,6 +9,7 @@ public interface ManagerService {
     /**
      * 根据管理员编号和密码校验登录
      * @param managerId
+     * @param password
      * @return
      */
     ManagerEntity selectByPrimaryKey(String managerId,String password);
